@@ -17,7 +17,6 @@ class FlashcardTest < MiniTest::Test
     guess = Guess.new("Juneau", card)
     assert_equal "Juneau", guess.card.answer
     assert_equal "Juneau", guess.response
-
     assert guess.correct?
     assert_equal "Correct!", guess.feedback
   end
@@ -47,14 +46,12 @@ class FlashcardTest < MiniTest::Test
     round = Round.new(deck)
     assert_equal [card_1, card_2], round.deck.cards
     assert_equal [], round.guesses
-    require "pry"; binding.pry
-    assert_equal "Juneau", round.current_card.card.answer
-    assert_equal "Juneau", round.record_guess("Juneau")
+    assert_equal "93,000,000", round.current_card.answer
+    round.record_guess("Juneau")
+    assert_equal "Juneau", round.guesses[0].guess
     assert_equal 1, round.guesses.count
-    # round.guesses.first.feedback
-    # => "Correct!"
-    # round.number_correct
-    # => 1
+    assert_equal "Correct!",round.guesses.first.feedback
+    assert_equal 1, round.number_correct
     # round.current_card
     # => #<Card:0x007ffdf1820a90 @answer="93,000,000", @question="Approximately how many miles are in one astronomical unit?">
     # round.record_guess("2")

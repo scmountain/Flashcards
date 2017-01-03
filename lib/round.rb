@@ -1,21 +1,25 @@
 class Round
-  attr_reader :deck, :guesses, :response, :count, :card_in_hand
+  attr_reader :deck, :guesses, :response, :current_card
   def initialize(deck)
     @deck = deck
     @guesses = []
-    @count = 1
-    @card_in_hand = nil
+    @guess = nil
   end
 
   def current_card
-    @deck.cards.each_entry do |card|
-      @card_in_hand = card
-    end
+    @current_card = draw_a_card
   end
 
+  def draw_a_card
+    @deck.cards.pop
+    end
+
   def record_guess(guess)
-    @count += 1
-    guess
+    guess_holder = Guess.new(guess, current_card)
+    @guesses << guess_holder
   end
+
+
+
 
 end

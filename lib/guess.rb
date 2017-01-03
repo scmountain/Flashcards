@@ -1,4 +1,4 @@
-
+require "./lib/round"
 class Guess
   attr_reader :guess, :card
     def initialize(guess, card)
@@ -17,6 +17,7 @@ class Guess
     def feedback
       if correct?
         "Correct!"
+        
       else
         "Incorrect!"
       end
